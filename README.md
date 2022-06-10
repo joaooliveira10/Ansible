@@ -1,9 +1,13 @@
 # Ansible
 
 Links
+
   Ansible: https://docs.ansible.com/ansible/latest/index.html
+  
   Chocolatey: https://chocolatey.org/install
+  
   Pip: https://packaging.python.org/en/latest/guides/installing-using-linux-tools/
+  
 
 1.Installation Ubuntu Virtual Machine
   1.1. Windows native virtualization option
