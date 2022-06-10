@@ -10,20 +10,31 @@ Links
   
 
 1.Installation Ubuntu Virtual Machine
+
   1.1. Windows native virtualization option
-    Open PowerShell
-      wsl -l -v                      #Check if you have wsl and what version
-      wsl --install -d ubuntu        #Ubuntu Installation
+   
+   Open PowerShell
+    
+   wsl -l -v                      #Check if you have wsl and what version
+     
+   wsl --install -d ubuntu        #Ubuntu Installation
  
  2.1. Virtualization option by VirtualBox
+  
   Install VirtualBox
+  
   Install Ubuntu image
+  
 
 2.Windowns preparation
+
  1.1. Open PowerShell
-	Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+	
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+
 
 3.Ubuntu [Master]
+
   1.1.Open Terminal
   
   2.1.Install Ansible
