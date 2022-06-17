@@ -3,11 +3,11 @@
 
 ## Conteúdo
 
-1. [Introdução](https://github.com/joaooliveira10/Ansible/edit/main/README.md#introdu%C3%A7%C3%A3o)
-2. [O que é o Ansible?](https://github.com/joaooliveira10/Ansible/edit/main/README.md#o-que-%C3%A9-o-ansible)
-3. [Ferramentas utilizadas](https://github.com/joaooliveira10/Ansible/edit/main/README.md#ferramentas-utilizadas)
-5. [Passo a passo da configuração](https://github.com/joaooliveira10/Ansible/edit/main/README.md#passo-a-passo-da-configuração)
-7. [Referências](https://github.com/joaooliveira10/Ansible/edit/main/README.md#refer%C3%AAncias)
+1. [Introdução](https://github.com/joaooliveira10/Ansible/blob/main/README.md#introdu%C3%A7%C3%A3o)
+2. [O que é o Ansible?](https://github.com/joaooliveira10/Ansible/blob/main/README.md#o-que-%C3%A9-o-ansible)
+3. [Ferramentas utilizadas](https://github.com/joaooliveira10/Ansible/blob/main/README.md#ferramentas-utilizadas)
+5. [Passo a passo da configuração](https://github.com/joaooliveira10/Ansible/blob/main/README.md#passo-a-passo-da-configura%C3%A7%C3%A3o)
+7. [Referências](https://github.com/joaooliveira10/Ansible/blob/main/README.md#refer%C3%AAncias)
 
 ## Introdução
 
