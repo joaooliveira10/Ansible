@@ -1,148 +1,113 @@
-# Ansible
+# :desktop_computer: ansible-comunicacao-dados
+  Projeto da disciplina de Comunicação de Dados para instalação de softwares em múltiplos computadores através de um servidor utilizando o Ansible.
 
-Links
+## Conteúdo
 
-  Ansible: https://docs.ansible.com/ansible/latest/index.html
+1. [Introdução](https://github.com/joaooliveira10/Ansible/edit/main/README.md#introdu%C3%A7%C3%A3o)
+2. [O que é o Ansible?](https://github.com/joaooliveira10/Ansible/edit/main/README.md#o-que-%C3%A9-o-ansible)
+3. [Ferramentas utilizadas](https://github.com/joaooliveira10/Ansible/edit/main/README.md#ferramentas-utilizadas)
+5. [Passo a passo da configuração](https://github.com/joaooliveira10/Ansible/edit/main/README.md#passo-a-passo-da-configuração)
+7. [Referências](https://github.com/joaooliveira10/Ansible/edit/main/README.md#refer%C3%AAncias)
+
+## Introdução
+
+  A ideia para este projeto foi delineada visando a otimização da configuração das máquinas dos laboratórios de informática do IFMT - Campus Octayde para o início das aulas das turmas anuais e semestrais. Para tanto, o objetivo é criar um servidor com uma máquina central e realizar a instalação de múltiplos programas simultâneamente em todos os computadores dos laboratórios.
+
+## O que é o Ansible?
+
+  O Ansible é uma ferramenta open source para automação de processos manuais de TI como instalação de softwares, provisionamento de infraestrutura, compartilhamento de automação e configurações através da mesma rede, etc.
   
-  Chocolatey: https://chocolatey.org/install
-  
-  Pip: https://packaging.python.org/en/latest/guides/installing-using-linux-tools/
-  
+## Ferramentas utilizadas
 
-1.Installation Ubuntu Virtual Machine
+  - Para o servidor Linux:
+    - Ansible;
+    - Python3-pip;
+    - WinRM
 
-  1.1. Windows native virtualization option
-   
-   Open PowerShell
-    
-   wsl -l -v                      #Check if you have wsl and what version
-     
-   wsl --install -d ubuntu        #Ubuntu Installation
+  - Para as máquinas Windows:
+    - PowerShell;
+    - Chocolatey;
+
+## Passo a passo da configuração
+
+  A primeira etapa a ser realizada é a instalação e configuração de uma máquina, física ou virtual, com o Sistema Operacional Linux para a função de servidor de rede do projeto.
+  
+  Caso seja utilizada uma máquina virtual, faça o download e instalação do [Virtual Box](https://www.virtualbox.org/wiki/Downloads) e siga as instruções deste [link](https://canaltech.com.br/software/como-criar-uma-maquina-virtual-com-o-virtualbox/), ou se preferir, há também a opção de virtualização nativa para o Windows. Para isso, abra o PowerShell como administrador e insira os seguintes comandos:
+  
+  ```
+  wsl -l -v
+  wsl --install -d ubuntu	
+  ```
+
+  O próximo passo é preparar o Windows da máquina. Para tanto, execute no PowerShell:
+  
+  ```
+  Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+  ```
+  
+  Com o Linux instalado, abra o terminal e inicie a instalação do Ansible e do gerenciador de pacotes pip:
  
- 2.1. Virtualization option by VirtualBox
-  
-  Install VirtualBox
-  
-  Install Ubuntu image
-  
+ ```
+ sudo apt update
+ sudo apt install software-properties-common
+ sudo add-apt-repository --yes --update ppa:ansible/ansible
+ sudo apt install ansible
+ ```
+ 
+ ```
+ yum install ansible -y
+ ```
+ 
+ ```
+ sudo apt update
+ sudo apt install python3-venv python3-pip
+ ```
+ 
+  Em seguida, abra o editor de texto para editar o arquivo de host:
 
-2.Windowns preparation
+```
+ vi /etc/ansible/hosts
+```
 
- 1.1. Open PowerShell
-	
-Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+```
+ hosts: windows
+  gather_facts: true
+  tasks:
+   name: Install firefox
+    win_chocolatey:
+     name: firefox
+     state: present
+```
 
+Agora, em um outro computador, verifique o seu ip no terminal:
 
-3.Ubuntu [Master]
+```
+ip addr show / ipconfig
+```
 
-  1.1.Open Terminal
-  
-  2.1.Install Ansible
-  
-   sudo apt update
-   
-   sudo apt install software-properties-common
-   
-   sudo add-apt-repository --yes --update ppa:ansible/ansible
-   
-   sudo apt install ansible
-    
-  2.2.Install Ansible "not a better option"
-  
-   yum install ansible -y
-    
-  3.1.pip
-  
-   sudo apt update
-    
-   sudo apt install python3-venv python3-pip
-    
-    
-  4.1 lsb_release -a
+Por fim, volte para a máquina de servidor e abra o arquivo install.yml com o editor de texto:
 
-  5.1 apt list -a ansible
+```
+vi install.yml
+```
 
-  6.1 apt list -a python3
-
-  7.1 pip list | grep pywinrm
-
-  8.1 ansible-galaxy collection install chocolatey.chocolatey
-
-
-5.Windows [Client]
-
-  1.1.Check the ip of the new machine
-  
-Windows Option = ipconfig / Linux Optino = ip addr show 
-"10.99.103.163"
-
-5.Hosts Editor [Master]
-
-  1.1.Open Text Editor(Use vi, nano or gedit...)
-  
-   vi /etc/ansible/hosts
-   
-  2.1.Edit host
-  
+```
 [windows]
 10.99.103.163
 
 [windows:vars]
-ansible_user="Login123"
-ansible_password="Password123"
+ansible_user="Conta123"
+ansible_password="senha123"
 ansible_port=5986
 ansible_connection=winrm
 ansible_winrm_server_cert_validation= ignore
+```
 
+## Referências
 
-6.Edit install.yml [Master]
+RED HAT. ***O que é o Ansible?*** Disponível em: <<https://www.redhat.com/pt-br/technologies/management/ansible/what-is-ansible>>
 
-  1.1. Terminal(Use vi, nano or gedit...)
-  
-   vi install.yml
-    
-  2.2.Edit install.yml
-  
-- hosts: windows
-  gather_facts: true
-  tasks:
-  - name: Install firefox
-    win_chocolatey:
-      name: firefox
-      state: present
+LINUX HELP. ***How to install an application on Windows by using Ansible playbook.*** Disponível em: <<https://www.linuxhelp.com/how-to-install-an-application-on-windows-by-using-ansible-playbook>>
 
-7.Check the syntax of the install.yml ansible playbook
+ANSIBLE DOCUMENTATION. ***Setting up a Windows Host.*** Disponível em: <<https://docs.ansible.com/ansible/latest/user_guide/windows_setup.html>>
 
-  1.1 ansible-playbook install.yml --syntax-check
-
-8.Run the install.yml playbook
-
-  1.1 ansible-playbook install.yml
-
-Extra
-
-E.1.Create playbook for uninstall application
-
-  1.1 vi uninstall.yml
-  
-- hosts: windows
-  gather_facts: true
-  tasks:
-  - name: Install firefox
-    win_chocolatey:
-      name: firefox
-      state: absent
-
-
-E.2.Check the syntax of the uninstall.yml ansible playbook
-
-  1.1 ansible-playbook uninstall.yml --syntax-check
-
-
-E.3.Run the uninstall.yml playbook
-
-  1.1 ansible-playbook uninstall.yml
-  
-  
-  
-  
