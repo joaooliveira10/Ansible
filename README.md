@@ -32,7 +32,7 @@
 
   A primeira etapa a ser realizada é a instalação e configuração de uma máquina, física ou virtual, com o Sistema Operacional Linux para a função de servidor de rede do projeto.
   
-  Caso seja utilizada uma máquina virtual, faça o download e instalação do [Virtual Box](https://www.virtualbox.org/wiki/Downloads) e siga as instruções deste [link](https://canaltech.com.br/software/como-criar-uma-maquina-virtual-com-o-virtualbox/), ou se preferir, há também a opção de virtualização nativa para o Windows. Para isso, abra o PowerShell como administrador e insira os seguintes comandos:
+  Caso seja utilizada uma máquina virtual, faça o download e instalação do [Virtual Box](https://www.virtualbox.org/wiki/Downloads) e siga as instruções deste [link](https://canaltech.com.br/software/como-criar-uma-maquina-virtual-com-o-virtualbox/), ou se preferir, há também a opção de virtualização nativa para o Windows (Na minha opnião melhor opção). Para isso, abra o PowerShell como administrador e insira os seguintes comandos:
   
   ```
   wsl -l -v
@@ -47,16 +47,25 @@
   
   Com o Linux instalado, abra o terminal e inicie a instalação do Ansible e do gerenciador de pacotes pip:
  
+ 
+ Recomendado pelo proprio doc do Ansible
  ```
  sudo apt update
  sudo apt install software-properties-common
  sudo add-apt-repository --yes --update ppa:ansible/ansible
  sudo apt install ansible
  ```
+ ou
+ 
+ Outra Opção (Se usar um não precisa o outro).
  
  ```
  yum install ansible -y
  ```
+ 
+ -----------------------------------------------------------
+ 
+ instalar o pip
  
  ```
  sudo apt update
